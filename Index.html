@@ -1,0 +1,35 @@
+<canvas id="canvas" width="1200" height="675" style="border:1px solid black;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<script type="text/javascript" src="Main.js"></script>
+<script type="text/javascript" src="Input.js"></script>
+<script type="text/javascript" src="Color.js"></script>
+
+<script>
+	"use strict";
+  let canvas;
+  let context;
+	let secondsPassed = 0;
+	let oldTimeStamp = 0;
+  window.onload = init;
+
+  function init()
+	{
+  	canvas = document.getElementById('canvas');
+    context = canvas.getContext('2d');
+		Start();
+    window.requestAnimationFrame(GameLoop);
+  }
+  function GameLoop(timeStamp)
+	{
+		secondsPassed = (timeStamp - oldTimeStamp) / 1000;
+		oldTimeStamp = timeStamp;
+		timeStamp = Math.min(secondsPassed, 0.1); //for slow computers
+		context.clearRect(0, 0, canvas.width, canvas.height);
+
+		Update();
+    Paint();
+    window.requestAnimationFrame(GameLoop);
+  }
+</script>
